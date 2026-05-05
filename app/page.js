@@ -9,6 +9,7 @@ import AIBrain    from '../components/AIBrain';
 import Dashboard  from '../components/Dashboard';
 import Pricing    from '../components/Pricing';
 import Footer     from '../components/Footer';
+import BrainChat  from '../components/BrainChat';
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <Pricing />
       </main>
       <Footer />
+      <BrainChat />
     </>
   );
 }

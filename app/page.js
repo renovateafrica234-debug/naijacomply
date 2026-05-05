@@ -5,12 +5,10 @@ import Hero       from '../components/Hero';
 import MCPGrid    from '../components/MCPGrid';
 import EInvoicing from '../components/EInvoicing';
 import Calculator from '../components/Calculator';
-
-// Placeholder components for sections you build later
-function AIBrain()   { return null; }
-function Dashboard() { return null; }
-function Pricing()   { return null; }
-function Footer()    { return null; }
+import AIBrain    from '../components/AIBrain';
+import Dashboard  from '../components/Dashboard';
+import Pricing    from '../components/Pricing';
+import Footer     from '../components/Footer';
 
 export default function Home() {
   return (

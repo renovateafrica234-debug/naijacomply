@@ -1,130 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  background: #F8FAF7;
-  color: #0A1F14;
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Fix click responsiveness */
+button, a, [role="button"] {
+  pointer-events: auto !important;
+  touch-action: manipulation;
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes pulse-ring {
-  0% { transform: scale(0.8); opacity: 1; }
-  100% { transform: scale(1.6); opacity: 0; }
-}
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-@keyframes agentPulse {
-  0%,100% { box-shadow: 0 0 0 0 rgba(0,230,118,0.3); }
-  50% { box-shadow: 0 0 0 8px rgba(0,230,118,0); }
+.nc-card, .nc-card * {
+  pointer-events: auto !important;
 }
 
-.fu { animation: fadeUp 0.6s cubic-bezier(.22,1,.36,1) both; }
-.fu1 { animation: fadeUp 0.6s cubic-bezier(.22,1,.36,1) 0.1s both; }
-.fu2 { animation: fadeUp 0.6s cubic-bezier(.22,1,.36,1) 0.2s both; }
-.fu3 { animation: fadeUp 0.6s cubic-bezier(.22,1,.36,1) 0.3s both; }
-.fu4 { animation: fadeUp 0.6s cubic-bezier(.22,1,.36,1) 0.4s both; }
-.fu5 { animation: fadeUp 0.6s cubic-bezier(.22,1,.36,1) 0.5s both; }
-
-.float { animation: float 4s ease-in-out infinite; }
-.agent-pulse { animation: agentPulse 2s ease-in-out infinite; }
-
-.nc-card {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(10,31,20,0.05);
-  transition: all 0.3s cubic-bezier(.22,1,.36,1);
-}
-.nc-card:hover {
-  border-color: rgba(0,230,118,0.25);
-  box-shadow: 0 10px 15px -3px rgba(10,31,20,0.08), 0 4px 6px -2px rgba(10,31,20,0.03);
-  transform: translateY(-2px);
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 10px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  border-radius: 6px;
-}
-.badge-green { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
-.badge-cyan { background: #E0F2FE; color: #0C4A6E; border: 1px solid #7DD3FC; }
-.badge-amber { background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; }
-.badge-red { background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5; }
-
-.agent-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  position: relative;
-  display: inline-block;
-}
-.agent-dot::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  animation: pulse-ring 2s ease-out infinite;
-}
-.agent-dot.active { background: #22C55E; }
-.agent-dot.active::after { background: rgba(34,197,94,0.3); }
-.agent-dot.idle { background: #94A3B8; }
-.agent-dot.busy { background: #D97706; }
-.agent-dot.busy::after { background: rgba(217,119,6,0.3); }
-
-.nc-input {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  color: #0A1F14;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.92rem;
-  padding: 12px 16px;
-  border-radius: 10px;
-  outline: none;
-  width: 100%;
-  transition: all 0.2s;
-}
-.nc-input:focus {
-  border-color: #00E676;
-  box-shadow: 0 0 0 3px rgba(0,230,118,0.15);
-}
-
-.ticker-track { display: inline-flex; animation: ticker 28s linear infinite; }
-.ticker-track:hover { animation-play-state: paused; }
-
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #F8FAF7; }
-::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
-
-::selection { background: rgba(0,230,118,0.2); color: #0A1F14; }
-
+/* Ensure mobile tap highlights */
 @media (max-width: 768px) {
-  .hide-mob { display: none !important; }
-  .mob-col { flex-direction: column !important; }
-  .mob-full { width: 100% !important; }
+  button, a {
+    -webkit-tap-highlight-color: rgba(0,230,118,0.15);
+    min-height: 44px;
   }
-               
+}

@@ -1,166 +1,105 @@
-// components/Hero.js
 "use client"
-import { useState, useEffect } from 'react';
-import { C, font } from '../lib/theme';
-
-const STATS = [
-  { n: '340+',  label: 'Businesses Compliant' },
-  { n: 'N12M+', label: 'Penalties Avoided' },
-  { n: '99.9%', label: 'Filing Accuracy' },
-  { n: '4 min', label: 'Avg Filing Time' },
-];
-
-const TICKER_ITEMS = [
-  'CAC ANNUAL RETURNS', 'FIRS E-INVOICING', 'PENALTY CALCULATOR',
-  'REAL-TIME COMPLIANCE', 'AI-POWERED FILING', 'MCP GOVERNMENT APIs',
-  'CAMA 2020 COMPLIANT', 'FIRS TAX AUTOMATION',
-];
+import { useState } from 'react';
+import Image from 'next/image';
+import { C, font, sectionTag, sectionTitle, btnPrimary, btnSecondary } from '../lib/theme';
 
 export default function Hero() {
-  const [tick, setTick] = useState(0);
-  const words = ['Automated.', 'Intelligent.', 'Seamless.'];
-
-  useEffect(() => {
-    const t = setInterval(() => setTick(i => (i + 1) % words.length), 2800);
-    return () => clearInterval(t);
-  }, []);
-
-  const allTicker = [...TICKER_ITEMS, ...TICKER_ITEMS];
+  const [email, setEmail] = useState('');
 
   return (
-    <section style={{ position: 'relative', minHeight: '100vh', paddingTop: 64, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+    <section id="hero" style={{ position: 'relative', padding: '140px 24px 100px', background: 'linear-gradient(180deg, #0A1F14 0%, #0f2e1d 40%, #F8FAF7 100%)', overflow: 'hidden' }}>
+      {/* Background network pattern */}
+      <div style={{ position: 'absolute', inset: 0, opacity: 0.08, backgroundImage: 'radial-gradient(circle at 20% 50%, #00E676 1px, transparent 1px), radial-gradient(circle at 80% 20%, #00E676 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
 
-      {/* Background glow orbs */}
-      <div style={{ position: 'absolute', top: '15%', left: '-8%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,255,136,0.08), transparent 70%)', pointerEvents: 'none' }} />
-      <div style={{ position: 'absolute', top: '40%', right: '-5%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(123,47,255,0.06), transparent 70%)', pointerEvents: 'none' }} />
-      <div style={{ position: 'absolute', bottom: '10%', left: '40%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,229,255,0.05), transparent 70%)', pointerEvents: 'none' }} />
+      <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center' }} className="mob-col">
+        <div className="fu" style={{ position: 'relative', zIndex: 2 }}>
+          <div style={{ display: 'flex', gap: 10, marginBottom: 24, flexWrap: 'wrap' }}>
+            <span className="badge badge-green"><span className="agent-dot active" style={{ width: 6, height: 6 }} />NVIDIA AI BRAIN ACTIVE</span>
+            <span className="badge badge-cyan">MCP GOVERNMENT APIS LIVE</span>
+            <span className="badge badge-green">💬 WHATSAPP CONNECTED</span>
+          </div>
 
-      {/* Nvidia-style spinning ring */}
-      <div className="spin hide-mob" style={{
-        position: 'absolute', top: '12%', right: '8%',
-        width: 280, height: 280,
-        border: '1px solid rgba(0,255,136,0.08)',
-        borderRadius: '50%',
-        pointerEvents: 'none',
-      }}>
-        <div style={{
-          position: 'absolute', top: -1, left: '50%', transform: 'translateX(-50%)',
-          width: 8, height: 8, borderRadius: '50%', background: C.green,
-          boxShadow: '0 0 12px ' + C.green,
-        }} />
-      </div>
-      <div style={{
-        position: 'absolute', top: '12%', right: '8%',
-        width: 220, height: 220,
-        marginTop: 30, marginRight: 30,
-        border: '1px solid rgba(0,229,255,0.05)',
-        borderRadius: '50%',
-        pointerEvents: 'none',
-      }} className="hide-mob" />
+          <h1 style={{ ...sectionTitle, color: '#fff', fontSize: 'clamp(2.2rem, 5vw, 3.8rem)' }}>
+            Nigerian Business<br />Compliance,<br />
+            <span style={{ color: C.green }}>Seamless.</span>
+          </h1>
 
-      {/* Main content */}
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '72px 24px 48px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
+          <p style={{ fontFamily: font.body, fontSize: '1.1rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.7, maxWidth: 520, marginBottom: 32 }}>
+            File CAC annual returns, generate FIRS-compliant e-invoices, calculate penalties in real-time, and stay ahead of every regulatory deadline — all from one AI-powered dashboard.
+          </p>
 
-        {/* Status badge */}
-        <div className="fu" style={{ marginBottom: 24 }}>
-          <span className="badge badge-green">
-            <span className="pulse" style={{ width: 6, height: 6, borderRadius: '50%', background: C.green, display: 'inline-block' }} />
-            NVIDIA AI BRAIN ACTIVE
-          </span>
-          <span className="badge badge-cyan" style={{ marginLeft: 8 }}>
-            MCP GOVERNMENT APIS LIVE
-          </span>
-        </div>
+          <div style={{ display: 'flex', gap: 12, marginBottom: 28, flexWrap: 'wrap' }}>
+            <button onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })} style={btnPrimary}>
+              Check My Penalty ↗
+            </button>
+            <button onClick={() => alert('Demo video modal opens here')} style={{ ...btnSecondary, background: 'rgba(255,255,255,0.08)', color: '#fff', border: '1px solid rgba(255,255,255,0.15)' }}>
+              ▶ Watch Demo
+            </button>
+          </div>
 
-        {/* Headline */}
-        <h1 className="fu2" style={{
-          fontFamily: font.display,
-          fontSize: 'clamp(2.4rem, 6vw, 5rem)',
-          fontWeight: 900,
-          color: C.white,
-          lineHeight: 1.0,
-          marginBottom: 16,
-          maxWidth: 700,
-        }}>
-          Nigerian Business<br />
-          Compliance,{' '}
-          <span className="glow" style={{ color: C.green }}>{words[tick]}</span>
-        </h1>
-
-        {/* Sub */}
-        <p className="fu3" style={{
-          fontSize: 'clamp(0.95rem, 1.8vw, 1.15rem)',
-          color: C.textDim,
-          maxWidth: 560,
-          lineHeight: 1.75,
-          marginBottom: 36,
-        }}>
-          File CAC annual returns, generate FIRS-compliant e-invoices, calculate penalties in real-time, and stay ahead of every regulatory deadline — all from one AI-powered dashboard.
-        </p>
-
-        {/* CTA row */}
-        <div className="fu4" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center', marginBottom: 56 }}>
-          <button style={{
-            background: 'linear-gradient(135deg, #00FF88, #00CC6A)',
-            color: '#050A0E',
-            fontFamily: font.display,
-            fontSize: '0.78rem', fontWeight: 700,
-            letterSpacing: '0.08em',
-            border: 'none', cursor: 'pointer',
-            padding: '14px 32px', borderRadius: 3,
-            display: 'flex', alignItems: 'center', gap: 8,
-            boxShadow: '0 0 24px rgba(0,255,136,0.25)',
-          }}>
-            <span>Check My Penalty</span>
-            <span>&#8599;</span>
-          </button>
-          <button style={{
-            border: '1px solid rgba(0,255,136,0.25)',
-            color: C.green,
-            fontFamily: font.display,
-            fontSize: '0.75rem', fontWeight: 700,
-            letterSpacing: '0.08em',
-            background: 'transparent', cursor: 'pointer',
-            padding: '13px 28px', borderRadius: 3,
-            display: 'flex', alignItems: 'center', gap: 8,
-          }}>
-            <span>&#9654;</span>
-            <span>Watch Demo</span>
-          </button>
-        </div>
-
-        {/* Stats strip */}
-        <div className="fu5" style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-          gap: 1,
-          borderTop: '1px solid rgba(0,255,136,0.08)',
-          paddingTop: 32,
-          maxWidth: 680,
-        }}>
-          {STATS.map((s, i) => (
-            <div key={i} style={{ paddingRight: 24, paddingLeft: i > 0 ? 24 : 0, borderRight: i < STATS.length - 1 ? '1px solid rgba(0,255,136,0.08)' : 'none' }}>
-              <div style={{ fontFamily: font.display, fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: 900, color: C.white, marginBottom: 4 }}>{s.n}</div>
-              <div style={{ fontFamily: font.mono, fontSize: '0.65rem', color: C.muted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{s.label}</div>
+          {/* WhatsApp USP Badge */}
+          <div onClick={() => window.open('https://wa.me/234YOURNUMBER?text=Hi%20NaijaComply', '_blank')}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '14px 20px', background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 12, cursor: 'pointer', transition: 'all 0.2s', marginBottom: 32 }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(34,197,94,0.2)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(34,197,94,0.12)'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+            <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#22C55E', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.3rem', boxShadow: '0 4px 12px rgba(34,197,94,0.3)' }}>💬</div>
+            <div>
+              <div style={{ fontFamily: font.display, fontSize: '0.9rem', fontWeight: 700, color: '#fff' }}>Get Alerts on WhatsApp</div>
+              <div style={{ fontFamily: font.body, fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Monthly reports, deadline reminders & approvals</div>
             </div>
-          ))}
+            <span style={{ fontFamily: font.mono, fontSize: '0.75rem', color: '#22C55E', fontWeight: 600 }}>CONNECT →</span>
+          </div>
+
+          <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontFamily: font.display, fontSize: '1.4rem', fontWeight: 700, color: '#fff' }}>500+</span>
+              <span style={{ fontFamily: font.body, fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', maxWidth: 80, lineHeight: 1.3 }}>Businesses Protected</span>
+            </div>
+            <div style={{ width: 1, height: 30, background: 'rgba(255,255,255,0.1)' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontFamily: font.display, fontSize: '1.4rem', fontWeight: 700, color: '#fff' }}>₦12M+</span>
+              <span style={{ fontFamily: font.body, fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', maxWidth: 80, lineHeight: 1.3 }}>Penalties Avoided</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Hand Mockup Image */}
+        <div className="fu2" style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div style={{ position: 'absolute', width: 320, height: 320, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,230,118,0.15) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+          <div style={{ position: 'relative', transform: 'rotate(-3deg)', transition: 'transform 0.3s', cursor: 'pointer' }}
+            onMouseEnter={e => e.currentTarget.style.transform = 'rotate(0deg) scale(1.02)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'rotate(-3deg) scale(1)'}>
+            <Image
+              src="/images/hand-mockup.jpg"
+              alt="NaijaComply on mobile"
+              width={380}
+              height={500}
+              style={{ borderRadius: 24, boxShadow: '0 25px 60px rgba(0,0,0,0.3)', objectFit: 'cover' }}
+              priority
+            />
+            {/* Floating WhatsApp indicator on the phone */}
+            <div className="float" style={{ position: 'absolute', bottom: 40, right: -20, padding: '10px 16px', background: '#fff', borderRadius: 12, boxShadow: '0 8px 24px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontSize: '1.2rem' }}>💬</span>
+              <div>
+                <div style={{ fontFamily: font.display, fontSize: '0.75rem', fontWeight: 700, color: C.text }}>New Alert</div>
+                <div style={{ fontFamily: font.body, fontSize: '0.65rem', color: C.textSecondary }}>CAC deadline in 3 days</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Ticker strip */}
-      <div style={{ background: 'rgba(0,255,136,0.05)', borderTop: '1px solid rgba(0,255,136,0.1)', borderBottom: '1px solid rgba(0,255,136,0.1)', padding: '10px 0', overflow: 'hidden' }}>
+      {/* Ticker */}
+      <div style={{ marginTop: 80, overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '16px 0' }}>
         <div className="ticker-track">
-          {allTicker.map((t, i) => (
-            <span key={i} style={{
-              fontFamily: font.mono,
-              fontSize: '0.7rem',
-              color: C.green,
-              letterSpacing: '0.15em',
-              padding: '0 28px',
-              whiteSpace: 'nowrap',
-              opacity: 0.7,
-            }}>
-              {t} <span style={{ opacity: 0.3, marginLeft: 8 }}>&#9670;</span>
+          {['CAC ANNUAL RETURNS', 'FIRS E-INVOICING', 'PENALTY CALCULATOR', 'REAL-TIME COMPLIANCE', 'AI-POWERED FILING', 'MCP GOVERNMENT APIs', 'CAMA 2020 COMPLIANT', 'FIRS TAX AUTOMATION', 'WHATSAPP ALERTS', 'NVIDIA AI BRAIN'].map((t, i) => (
+            <span key={i} style={{ fontFamily: font.mono, fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)', fontWeight: 500, marginRight: 40, whiteSpace: 'nowrap' }}>
+              ◆ {t}
+            </span>
+          ))}
+          {['CAC ANNUAL RETURNS', 'FIRS E-INVOICING', 'PENALTY CALCULATOR', 'REAL-TIME COMPLIANCE', 'AI-POWERED FILING', 'MCP GOVERNMENT APIs', 'CAMA 2020 COMPLIANT', 'FIRS TAX AUTOMATION', 'WHATSAPP ALERTS', 'NVIDIA AI BRAIN'].map((t, i) => (
+            <span key={'dup'+i} style={{ fontFamily: font.mono, fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)', fontWeight: 500, marginRight: 40, whiteSpace: 'nowrap' }}>
+              ◆ {t}
             </span>
           ))}
         </div>

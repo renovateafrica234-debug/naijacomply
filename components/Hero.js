@@ -96,7 +96,7 @@ export default function Hero() {
         </div>
 
         {/* WhatsApp USP Row */}
-        <div className="fu4" onClick={() => window.open('https://wa.me/234YOURNUMBER?text=Hi%20NaijaComply', '_blank')}
+        <div className="fu4" onClick={() => window.open('https://wa.me/2349159199306?text=Hi%20NaijaComply', '_blank')}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 14,
             padding: '14px 20px',

@@ -1,76 +1,31 @@
-// app/api/brain/route.js
-// Single API endpoint for all NaijaComply AI brain actions
-// Called from frontend components via fetch('/api/brain', { method: 'POST', body: ... })
-
-import { NextResponse } from "next/server";
-import {
-  askComplianceQuestion,
-  explainPenalty,
-  autoFillCACForm,
-  generateInvoiceDescription,
-  explainComplianceScore,
-} from "../../../lib/brain";
+import { brainAsk, dispatchAgent, orchestrate, AGENTS } from '../../../lib/brain';
 
 export async function POST(request) {
   try {
-    const body   = await request.json();
-    const action = body.action;
+    const body = await request.json();
+    const { action, question, agentId, business, data, businesses, priority } = body;
 
-    if (!action) {
-      return NextResponse.json({ error: "Missing action" }, { status: 400 });
+    if (action === 'dispatch' && agentId) {
+      const result = await dispatchAgent({ agentId, action: data?.subAction || 'status_check', business: business || {}, data: data || {} });
+      return Response.json(result);
     }
-
-    if (!process.env.NVIDIA_API_KEY) {
-      return NextResponse.json({ error: "NVIDIA_API_KEY not set" }, { status: 500 });
+    if (action === 'orchestrate') {
+      const result = await orchestrate({ businesses: businesses || [], priority: priority || 'risk' });
+      return Response.json(result);
     }
-
-    let result;
-
-    switch (action) {
-
-      // Ask a compliance question
-      // body: { action: "ask", question: "Am I overdue?", business: { ... } }
-      case "ask":
-        if (!body.question) return NextResponse.json({ error: "Missing question" }, { status: 400 });
-        result = await askComplianceQuestion(body.question, body.business || {});
-        break;
-
-      // Explain a penalty calculation
-      // body: { action: "explain_penalty", penalty: { companyType, shareCapital, yearsLate, annualFee, penalty, total } }
-      case "explain_penalty":
-        if (!body.penalty) return NextResponse.json({ error: "Missing penalty data" }, { status: 400 });
-        result = await explainPenalty(body.penalty);
-        break;
-
-      // Auto-fill CAC form fields
-      // body: { action: "autofill", profile: { rcNumber, companyName, address, ... } }
-      case "autofill":
-        if (!body.profile) return NextResponse.json({ error: "Missing business profile" }, { status: 400 });
-        result = await autoFillCACForm(body.profile);
-        break;
-
-      // Generate an e-invoice description
-      // body: { action: "invoice_desc", invoice: { serviceType, businessName, period, amount } }
-      case "invoice_desc":
-        if (!body.invoice) return NextResponse.json({ error: "Missing invoice data" }, { status: 400 });
-        result = await generateInvoiceDescription(body.invoice);
-        break;
-
-      // Explain a compliance score
-      // body: { action: "score", scoreData: { score, overdueCount, pendingFilings, ... } }
-      case "score":
-        if (!body.scoreData) return NextResponse.json({ error: "Missing score data" }, { status: 400 });
-        result = await explainComplianceScore(body.scoreData);
-        break;
-
-      default:
-        return NextResponse.json({ error: "Unknown action: " + action }, { status: 400 });
+    if (action === 'list_agents') {
+      return Response.json({ success: true, agents: Object.entries(AGENTS).map(([id, a]) => ({ id, name: a.name, model: a.model, capabilities: a.capabilities })) });
     }
-
-    return NextResponse.json({ success: true, result });
-
+    if (action === 'ask' && question) {
+      const result = await brainAsk(question);
+      return Response.json(result);
+    }
+    return Response.json({ success: false, error: 'Invalid action. Use: ask, dispatch, orchestrate, list_agents' }, { status: 400 });
   } catch (err) {
-    console.error("Brain API error:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return Response.json({ success: false, error: err.message }, { status: 500 });
   }
+}
+
+export async function GET() {
+  return Response.json({ status: 'online', brain: 'NaijaComply Compliance Brain v2.0', agents: Object.keys(AGENTS).length, timestamp: new Date().toISOString() });
 }

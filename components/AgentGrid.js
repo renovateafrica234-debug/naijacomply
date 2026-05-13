@@ -3,13 +3,13 @@ import { useState } from 'react';
 import { C, font, agentColors, sectionTag, sectionTitle, card } from '../lib/theme';
 
 const AGENTS = [
-  { id: 'cac', name: 'CAC Agent', role: 'Annual returns, BN-1, director changes', model: 'Nvidia Llama 3.3 70B', status: 'active', tasks: ['File annual returns', 'Update directors', 'RC status check'], businesses: 12 },
-  { id: 'firs', name: 'FIRS Agent', role: 'Tax returns, VAT, TIN management', model: 'Nvidia Llama 3.3 70B', status: 'active', tasks: ['VAT filing', 'CIT returns', 'TIN verification'], businesses: 8 },
-  { id: 'state', name: 'State Agent', role: 'Permits, signage fees, local levies', model: 'Nvidia Llama 3.3 70B', status: 'idle', tasks: ['Permit renewal', 'Signage fees', 'Local levies'], businesses: 5 },
-  { id: 'deadline', name: 'Deadline Agent', role: 'Predictive alerts, auto-queue, risk scoring', model: 'Nvidia Nemotron 70B', status: 'active', tasks: ['Deadline tracking', 'Risk scoring', 'Auto-queue'], businesses: 20 },
-  { id: 'document', name: 'Document Agent', role: 'Form generation, validation, submission', model: 'Nvidia Llama 3.3 70B', status: 'active', tasks: ['Form generation', 'Data validation', 'Auto-submit'], businesses: 15 },
-  { id: 'penalty', name: 'Penalty Rescue', role: 'Penalty detection, appeal strategy, auto-filing', model: 'Nvidia Nemotron 70B', status: 'busy', tasks: ['Penalty detection', 'Appeal strategy', 'Auto-filing'], businesses: 3 },
-  { id: 'whatsapp', name: 'WhatsApp Agent', role: 'Alerts, approvals, monthly reports', model: 'Fast Llama 3.1 8B', status: 'active', tasks: ['WhatsApp alerts', 'Approval requests', 'Monthly reports'], businesses: 20 },
+  { id: 'cac', name: 'CAC Agent', role: 'Annual returns, BN-1, director changes', model: 'Nvidia Llama 3.3 70B', status: 'active', tasks: ['File annual returns', 'Update directors', 'RC status check'], businesses: 12, link: '#calculator' },
+  { id: 'firs', name: 'FIRS Agent', role: 'Tax returns, VAT, TIN management', model: 'Nvidia Llama 3.3 70B', status: 'active', tasks: ['VAT filing', 'CIT returns', 'TIN verification'], businesses: 8, link: '#e-invoice' },
+  { id: 'state', name: 'State Agent', role: 'Permits, signage fees, local levies', model: 'Nvidia Llama 3.3 70B', status: 'idle', tasks: ['Permit renewal', 'Signage fees', 'Local levies'], businesses: 5, link: '#integrations' },
+  { id: 'deadline', name: 'Deadline Agent', role: 'Predictive alerts, auto-queue, risk scoring', model: 'Nvidia Nemotron 70B', status: 'active', tasks: ['Deadline tracking', 'Risk scoring', 'Auto-queue'], businesses: 20, link: '#dashboard' },
+  { id: 'document', name: 'Document Agent', role: 'Form generation, validation, submission', model: 'Nvidia Llama 3.3 70B', status: 'active', tasks: ['Form generation', 'Data validation', 'Auto-submit'], businesses: 15, link: '#dashboard' },
+  { id: 'penalty', name: 'Penalty Rescue', role: 'Penalty detection, appeal strategy, auto-filing', model: 'Nvidia Nemotron 70B', status: 'busy', tasks: ['Penalty detection', 'Appeal strategy', 'Auto-filing'], businesses: 3, link: '#calculator' },
+  { id: 'whatsapp', name: 'WhatsApp Agent', role: 'Alerts, approvals, monthly reports', model: 'Fast Llama 3.1 8B', status: 'active', tasks: ['WhatsApp alerts', 'Approval requests', 'Monthly reports'], businesses: 20, link: null },
 ];
 
 const statusConfig = {
@@ -20,6 +20,14 @@ const statusConfig = {
 
 export default function AgentGrid() {
   const [hovered, setHovered] = useState(null);
+
+  const handleAgentClick = (agent) => {
+    if (agent.id === 'whatsapp') {
+      window.open('https://wa.me/2349159199306?text=Hi%20NaijaComply', '_blank');
+    } else if (agent.link) {
+      document.querySelector(agent.link)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section id="agents" style={{ padding: '100px 24px', background: C.bg }}>
@@ -44,6 +52,7 @@ export default function AgentGrid() {
             const isHovered = hovered === i;
             return (
               <div key={agent.id} className={`fu${Math.min(i + 1, 5)}`}
+                onClick={() => handleAgentClick(agent)}
                 onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)}
                 style={{
                   ...card, padding: '28px', cursor: 'pointer',
@@ -74,7 +83,9 @@ export default function AgentGrid() {
                   <span style={{ fontFamily: font.body, fontSize: '0.8rem', color: C.textMuted }}>
                     <strong style={{ color: C.text, fontWeight: 600 }}>{agent.businesses}</strong> businesses
                   </span>
-                  <span style={{ fontFamily: font.mono, fontSize: '0.65rem', color: colors.primary, fontWeight: 600 }}>View →</span>
+                  <span style={{ fontFamily: font.mono, fontSize: '0.65rem', color: colors.primary, fontWeight: 600 }}>
+                    {agent.id === 'whatsapp' ? 'Chat →' : 'View →'}
+                  </span>
                 </div>
               </div>
             );

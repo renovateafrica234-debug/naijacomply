@@ -1,17 +1,10 @@
-/* Fix click responsiveness */
-button, a, [role="button"] {
-  pointer-events: auto !important;
-  touch-action: manipulation;
+/* BrainChat animations */
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
 }
 
-.nc-card, .nc-card * {
+/* Ensure chat is above everything */
+[style*="z-index: 200"] {
   pointer-events: auto !important;
-}
-
-/* Ensure mobile tap highlights */
-@media (max-width: 768px) {
-  button, a {
-    -webkit-tap-highlight-color: rgba(0,230,118,0.15);
-    min-height: 44px;
-  }
 }

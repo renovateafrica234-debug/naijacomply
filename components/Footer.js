@@ -16,7 +16,7 @@ export default function Footer() {
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.9rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, marginBottom: 20 }}>
               AI-powered compliance for Nigerian businesses. CAC, FIRS, and state filings — automated.
             </p>
-            <button onClick={() => window.open('https://wa.me/234YOURNUMBER?text=Hi%20NaijaComply', '_blank')}
+            <button onClick={() => window.open('https://wa.me/2349159199306?text=Hi%20NaijaComply', '_blank')}
               style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 18px', background: '#22C55E', border: 'none', borderRadius: 8, color: '#fff', fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}>
               <span style={{ fontSize: '1.1rem' }}>💬</span> Chat on WhatsApp
             </button>

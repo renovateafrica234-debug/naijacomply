@@ -47,7 +47,7 @@ export default function Nav() {
             style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.82rem', fontWeight: 600, color: '#0A1F14', background: 'linear-gradient(135deg, #00E676, #00C853)', border: 'none', padding: '8px 20px', borderRadius: 8, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, boxShadow: '0 4px 14px rgba(0,230,118,0.25)' }}>
             Get Started ↗
           </button>
-          <button onClick={() => window.open('https://wa.me/234YOURNUMBER?text=Hi%20NaijaComply', '_blank')}
+          <button onClick={() => window.open('https://wa.me/2349159199306?text=Hi%20NaijaComply', '_blank')}
             style={{ width: 36, height: 36, borderRadius: 8, background: '#22C55E', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', flexShrink: 0 }}>
             💬
           </button>

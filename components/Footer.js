@@ -1,100 +1,61 @@
-// components/Footer.js
 "use client"
+import Image from 'next/image';
 import { C, font } from '../lib/theme';
 
-const LINKS = {
-  Product:  ['Dashboard', 'E-Invoicing', 'Penalty Calculator', 'AI Brain', 'API Access'],
-  Company:  ['About Us', 'Blog', 'Careers', 'Press Kit', 'Contact'],
-  Legal:    ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'NDPR Compliance'],
-  Support:  ['Help Centre', 'WhatsApp Support', 'System Status', 'Changelog'],
-};
-
-const INTEGRATIONS = ['CAC Portal', 'FIRS TaxPro-Max', 'FIRS e-Invoice', 'NAFDAC', 'NERC'];
-
 export default function Footer() {
-  const line = '1px solid rgba(0,255,136,0.07)';
-
   return (
-    <footer style={{ borderTop: line, background: 'rgba(5,10,14,0.98)' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '56px 24px 32px' }}>
-
-        {/* Top row */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', gap: 40, paddingBottom: 48, borderBottom: line, flexWrap: 'wrap' }} className="mob-col">
-
-          {/* Brand column */}
+    <footer style={{ background: '#0A1F14', padding: '60px 24px 30px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 50 }} className="mob-col">
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <div style={{
-                width: 34, height: 34,
-                background: 'linear-gradient(135deg, #00FF88, #00CC6A)',
-                borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                boxShadow: '0 0 12px rgba(0,255,136,0.25)',
-              }}>
-                <span style={{ fontFamily: font.display, fontSize: '0.75rem', fontWeight: 900, color: '#050A0E' }}>NC</span>
-              </div>
-              <div>
-                <div style={{ fontFamily: font.display, fontSize: '0.95rem', fontWeight: 900, color: C.white, letterSpacing: '0.05em' }}>NaijaComply</div>
-                <div style={{ fontFamily: font.mono, fontSize: '0.48rem', color: C.green, letterSpacing: '0.15em', opacity: 0.7 }}>AI COMPLIANCE ENGINE</div>
-              </div>
+              <Image src="/images/naijacomply-logo.png" alt="NaijaComply" width={32} height={32} style={{ borderRadius: 6 }} />
+              <span style={{ fontFamily: font.display, fontSize: '1.1rem', fontWeight: 700, color: '#fff' }}>NaijaComply</span>
             </div>
-            <p style={{ fontSize: '0.83rem', color: C.textDim, lineHeight: 1.7, maxWidth: 260, marginBottom: 20 }}>
-              AI-powered business compliance for Nigeria. CAC returns, FIRS e-invoicing, and regulatory automation in one platform.
+            <p style={{ fontFamily: font.body, fontSize: '0.9rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, marginBottom: 20 }}>
+              AI-powered compliance for Nigerian businesses. CAC, FIRS, and state filings — automated.
             </p>
-
-            {/* Integrations */}
-            <div style={{ fontFamily: font.mono, fontSize: '0.6rem', color: C.muted, letterSpacing: '0.1em', marginBottom: 10 }}>CONNECTED TO</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-              {INTEGRATIONS.map((name, i) => (
-                <span key={i} style={{
-                  fontFamily: font.mono, fontSize: '0.6rem',
-                  color: C.green, padding: '3px 8px',
-                  border: '1px solid rgba(0,255,136,0.2)',
-                  borderRadius: 2, letterSpacing: '0.06em',
-                }}>
-                  {name}
-                </span>
-              ))}
-            </div>
+            <button onClick={() => window.open('https://wa.me/2349159199306?text=Hi%20NaijaComply', '_blank')}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 18px', background: '#22C55E', border: 'none', borderRadius: 8, color: '#fff', fontFamily: font.display, fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}>
+              <span style={{ fontSize: '1.1rem' }}>💬</span> Chat on WhatsApp
+            </button>
           </div>
-
-          {/* Link columns */}
-          {Object.entries(LINKS).map(([title, items]) => (
-            <div key={title}>
-              <div style={{ fontFamily: font.mono, fontSize: '0.62rem', color: C.muted, letterSpacing: '0.15em', marginBottom: 16, fontWeight: 600 }}>{title.toUpperCase()}</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {items.map((item, j) => (
-                  <span key={j} style={{
-                    fontSize: '0.83rem', color: C.textDim,
-                    cursor: 'pointer', transition: 'color 0.2s',
-                  }}
-                    onMouseEnter={e => e.target.style.color = C.green}
-                    onMouseLeave={e => e.target.style.color = C.textDim}
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+          <div>
+            <h4 style={{ fontFamily: font.display, fontSize: '0.85rem', fontWeight: 600, color: '#fff', marginBottom: 16 }}>Product</h4>
+            {['Dashboard', 'E-Invoice', 'Calculator', 'Agents', 'Pricing'].map(item => (
+              <button key={item} onClick={() => document.querySelector(`#${item.toLowerCase().replace(' ', '-')}`)?.scrollIntoView({ behavior: 'smooth' })}
+                style={{ display: 'block', background: 'none', border: 'none', padding: '6px 0', fontFamily: font.body, fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', textAlign: 'left' }}>
+                {item}
+              </button>
+            ))}
+          </div>
+          <div>
+            <h4 style={{ fontFamily: font.display, fontSize: '0.85rem', fontWeight: 600, color: '#fff', marginBottom: 16 }}>Company</h4>
+            {['About', 'Blog', 'Careers', 'Contact'].map(item => (
+              <button key={item} onClick={() => alert(`${item} page coming soon`)}
+                style={{ display: 'block', background: 'none', border: 'none', padding: '6px 0', fontFamily: font.body, fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', textAlign: 'left' }}>
+                {item}
+              </button>
+            ))}
+          </div>
+          <div>
+            <h4 style={{ fontFamily: font.display, fontSize: '0.85rem', fontWeight: 600, color: '#fff', marginBottom: 16 }}>Legal</h4>
+            {['Privacy', 'Terms', 'Security'].map(item => (
+              <button key={item} onClick={() => alert(`${item} page coming soon`)}
+                style={{ display: 'block', background: 'none', border: 'none', padding: '6px 0', fontFamily: font.body, fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', textAlign: 'left' }}>
+                {item}
+              </button>
+            ))}
+          </div>
         </div>
-
-        {/* Compliance notice */}
-        <div style={{ margin: '28px 0', padding: '16px 20px', background: 'rgba(0,255,136,0.03)', border: '1px solid rgba(0,255,136,0.08)', borderRadius: 3 }}>
-          <p style={{ fontFamily: font.mono, fontSize: '0.65rem', color: C.muted, lineHeight: 1.7, letterSpacing: '0.04em' }}>
-            <strong style={{ color: C.green }}>REGULATORY NOTICE:</strong> NaijaComply operates in compliance with the Companies and Allied Matters Act (CAMA) 2020, the Finance Act 2023, and FIRS e-Invoice directives. All e-invoices generated are submitted to the FIRS gateway in real time. NaijaComply is not a law firm. For legal compliance advice, consult a qualified Nigerian lawyer.
-          </p>
-        </div>
-
-        {/* Bottom bar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14 }}>
-          <span style={{ fontFamily: font.mono, fontSize: '0.65rem', color: C.muted }}>
-            &copy; 2026 NaijaComply &mdash; A Renovate Africa Product &mdash; Abuja, Nigeria
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+          <span style={{ fontFamily: font.body, fontSize: '0.8rem', color: 'rgba(255,255,255,0.3)' }}>
+            © 2026 NaijaComply. Compliance, Intelligent.
           </span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <span style={{ fontFamily: font.mono, fontSize: '0.62rem', color: C.muted }}>hello@naijacomply.ng</span>
-            <div style={{ padding: '4px 10px', background: 'rgba(118,185,0,0.08)', border: '1px solid rgba(118,185,0,0.2)', borderRadius: 2 }}>
-              <span style={{ fontFamily: font.mono, fontSize: '0.58rem', color: '#76B900', fontWeight: 700, letterSpacing: '0.1em' }}>NVIDIA POWERED</span>
-            </div>
+          <div style={{ display: 'flex', gap: 16 }}>
+            <button onClick={() => window.open('https://twitter.com/naijacomply', '_blank')} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: '1rem' }}>𝕏</button>
+            <button onClick={() => window.open('https://linkedin.com/company/naijacomply', '_blank')} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: '1rem' }}>in</button>
+            <button onClick={() => window.open('https://wa.me/234YOURNUMBER', '_blank')} style={{ background: 'none', border: 'none', color: '#22C55E', cursor: 'pointer', fontSize: '1rem' }}>💬</button>
           </div>
         </div>
       </div>
